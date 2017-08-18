@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
+import com.ufcg.si1.state.IQueixaState;
 import com.ufcg.si1.state.QueixaAberta;
 import com.ufcg.si1.util.*;
 
@@ -105,7 +106,8 @@ public class RestUnidadeController {
         Iterator<Queixa> it = queixaService.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
             Queixa q = it1.next();
-            if (q.getEstado().equals(new QueixaAberta()))
+            IQueixaState aberta = new QueixaAberta();
+            if (q.getEstado().equals(aberta))
                 contador++;
         }
 

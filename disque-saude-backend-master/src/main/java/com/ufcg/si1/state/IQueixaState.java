@@ -9,5 +9,9 @@ public interface IQueixaState {
 	public IQueixaState estadoFechado() throws QueixaStatusException; // Metodos criados apenas para adaptação posterior com os metodos corretos pertencentes ao codigo.
 	
 	public IQueixaState estadoEmAndamento() throws QueixaStatusException;
+	
+	public String getState();
+	
+	public boolean equals(IQueixaState obj);
 
 }

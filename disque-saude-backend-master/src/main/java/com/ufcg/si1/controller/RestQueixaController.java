@@ -2,6 +2,8 @@ package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
+import com.ufcg.si1.state.IQueixaState;
+import com.ufcg.si1.state.QueixaAberta;
 import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.QueixaStatusException;
@@ -40,7 +42,12 @@ public class RestQueixaController {
 	@RequestMapping(value = "/abrirQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) throws QueixaVaziaException {
 		try {
-			queixaService.saveQueixa(queixa);
+			Queixa newQueixa = new Queixa(queixa.getId(), queixa.getDescricao(), queixa.getComentario(), 
+					queixa.getSolicitante().getNome(), queixa.getSolicitante().getEmail(),
+					queixa.getSolicitante().getEndereco().getRua(), queixa.getSolicitante().getEndereco().getUf(),
+					queixa.getSolicitante().getEndereco().getCidade());
+			
+			queixaService.saveQueixa(newQueixa);
 		} catch (QueixaStatusException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}

@@ -3,7 +3,8 @@ package com.ufcg.si1.state;
 import exceptions.QueixaStatusException;
 
 public class QueixaFechada implements IQueixaState {
-
+	public String state = "F";
+	
 	@Override
 	public IQueixaState estadoAberto() {
 		return new QueixaAberta();
@@ -18,6 +19,16 @@ public class QueixaFechada implements IQueixaState {
 	public IQueixaState estadoEmAndamento() {
 		return new QueixaEmAndamento();
 	}
-
 	
+	public String toString() {
+		return "Fechado";
+	}
+	
+	public String getState() {
+		return state;
+	}
+
+	public boolean equals(IQueixaState obj) {
+		return obj.getState().equals(this.state);
+	}
 }
